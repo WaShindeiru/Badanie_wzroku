@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def reduce_matrix_by_rows(matrix):
     value = 0
     size = matrix.shape[0]
@@ -12,6 +13,7 @@ def reduce_matrix_by_rows(matrix):
         matrix[row_index, :] -= min_value
 
     return value
+
 
 def reduce_matrix_by_column(matrix):
     value = 0
@@ -26,6 +28,7 @@ def reduce_matrix_by_column(matrix):
 
     return value
 
+
 def reduce_matrix(matrix):
     lower_bound = reduce_matrix_by_rows(matrix)
     lower_bound += reduce_matrix_by_column(matrix)
@@ -33,17 +36,25 @@ def reduce_matrix(matrix):
     return lower_bound
 
 def main():
-    matrix_aha = np.array([
-        [5, 2, 3, 2, 7],
-        [6, 8, 4, 2, 5],
-        [6, 4, 3, 7, 2],
-        [6, 9, 0, 4, 0],
-        [4, 1, 2, 4, 0]])
+    lecture_matrix = np.array([
+        [float('inf'), 5, 4, 6, 6],
+        [8, float('inf'), 5, 3, 4],
+        [4, 3, float('inf'), 3, 1],
+        [8, 2, 5, float('inf'), 6],
+        [2, 2, 7, 0, float('inf')]])
 
-    value = reduce_matrix(matrix_aha)
+    print(f"Macierz z wykładu: \n {lecture_matrix} \n")
+    reduced_matrix_value = reduce_matrix(lecture_matrix)
 
-    print(matrix_aha)
-    print(value)
+    print(f"Macierz zredukowana: \n {lecture_matrix} \n")
+
+    random_matrix = np.random.randint(1, 15, size=(6, 6)).astype('float')
+    np.fill_diagonal(random_matrix, float('inf'))
+
+    print(f"Macierz losowa: \n {random_matrix} \n")
+    reduced_random_matrix_value = reduce_matrix(random_matrix)
+
+    print(f"Macierz zredukowana: \n {random_matrix}")
 
 
 if __name__ == "__main__":
